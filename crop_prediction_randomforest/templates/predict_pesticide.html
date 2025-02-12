@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesticide Requirement Prediction</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('https://plus.unsplash.com/premium_photo-1661907005604-cec7ffb6a042?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* Replace with a valid URL or local image */
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.85);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            text-align: center;
+        }
+        h2 {
+            color: #2c3e50;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        label {
+            font-size: 18px;
+            color: #2c3e50;
+            display: block;
+            margin-bottom: 10px;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        input[type="submit"] {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #16a085;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #14806b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Pesticide Requirement Prediction</h2>
+        <form method="POST" action="/predict_pesticide">
+            <label for="crop">Select Crop:</label>
+            <select id="crop" name="crop">
+                {% for crop in crops %}
+                    <option value="{{ crop }}">{{ crop }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="rainfall">Average Rainfall (mm):</label>
+            <input type="text" id="rainfall" name="rainfall" required placeholder="Enter average rainfall">
+
+
+
+            <input type="submit" value="Predict Pesticide Requirement">
+        </form>
+    </div>
+</body>
+</html>

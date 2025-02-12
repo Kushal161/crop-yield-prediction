@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini Chatbot</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
+</head>
+<body>
+    <div>
+        <h1>Chat with Gemini Bot</h1>
+        <div id="chat-window"></div>
+
+        <!-- Dropdown for selecting a predefined prompt -->
+        <label for="prompt">Choose a prompt:</label>
+        <select id="prompt" onchange="sendPrompt()">
+            <option value="" disabled selected>Select a prompt</option>
+            <option value="Tell me about today's weather">Tell me about today's weather</option>
+            <option value="Give me some interesting facts">Give me some interesting facts</option>
+            <option value="What's your favorite book?">What's your favorite book?</option>
+            <!-- Add more prompts as needed -->
+        </select>
+
+        <br>
+
+        <!-- Input box for typing a custom message -->
+        <input type="text" id="user-input" placeholder="Type your message...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <script>
+        var socket = io();
+
+        socket.on('response', function(response){
+            document.getElementById('chat-window').innerHTML += '<p>' + response + '</p>';
+        });
+
+        function sendMessage() {
+            var msg = document.getElementById('user-input').value;
+            socket.emit('message', msg);
+            document.getElementById('user-input').value = '';
+        }
+
+        function sendPrompt() {
+            var promptMsg = document.getElementById('prompt').value;
+            socket.emit('message', promptMsg);
+        }
+    </script>
+</body>
+</html>
